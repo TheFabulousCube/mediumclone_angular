@@ -32,7 +32,32 @@
               formControlName="password"
             />
           </fieldset>
-          <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
+          <div
+            *ngIf="username.invalid && (username.dirty || username.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="username.errors?.['required']">Name is required.</div>
+          </div>
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="email.errors?.['required']">Email is required.</div>
+          </div>
+          <div
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="email.errors?.['email']">
+              Email must be valid email.
+            </div>
+          </div>
+          <h1>Form Status: {{ form.status }}</h1>
+          <button
+            type="submit"
+            class="btn btn-lg btn-primary pull-xs-right"
+            [disabled]="isSubmitting$ | async"
+          >
             Sign Up
           </button>
         </form>
