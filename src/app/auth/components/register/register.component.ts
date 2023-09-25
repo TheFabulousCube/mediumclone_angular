@@ -5,9 +5,7 @@ import {Store} from '@ngrx/store'
 import {authActions} from '../../store/actions'
 import {RegisterRequestInterface} from '../../types/registerRequest.interface'
 import {CommonModule, NgIf} from '@angular/common'
-import {AuthStateInterface} from '../../types/authState.interface'
 import {selectIsSubmitting} from '../../store/reducers'
-import {AuthService} from '../../services/auth.service'
 
 @Component({
   selector: 'mc-register',
@@ -34,10 +32,6 @@ export class RegisterComponent {
       user: this.form.getRawValue(),
     }
     this.store.dispatch(authActions.register({request}))
-    // console.log('req: ', register({request}))
-    // this.authService
-    //   .register(request)
-    //   .subscribe((res) => console.log('res: ', res))
   }
 
   get username() {
