@@ -1,11 +1,13 @@
+import {CommonModule} from '@angular/common'
 import {Component} from '@angular/core'
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms'
 import {RouterLink} from '@angular/router'
 import {Store} from '@ngrx/store'
+import {AuthService} from '../../services/auth.service'
 import {authActions} from '../../store/actions'
-import {RegisterRequestInterface} from '../../types/registerRequest.interface'
-import {CommonModule, NgIf} from '@angular/common'
 import {selectIsSubmitting} from '../../store/reducers'
+import {AuthStateInterface} from '../../types/authState.interface'
+import {RegisterRequestInterface} from '../../types/registerRequest.interface'
 
 @Component({
   selector: 'mc-register',
@@ -15,19 +17,15 @@ import {selectIsSubmitting} from '../../store/reducers'
 })
 export class RegisterComponent {
   form = this.fb.nonNullable.group({
-    username: ['', Validators.required],
-    email: ['', [Validators.email, Validators.required]],
+    username: ['' /*Validators.required*/],
+    email: ['' /*[Validators.email, Validators.required]*/],
     password: [''],
   })
   isSubmitting$ = this.store.select(selectIsSubmitting)
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store //<{auth: AuthStateInterface}>, //private authService: AuthService
-  ) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   onSubmit() {
-    console.log('form', this.form.getRawValue())
     const request: RegisterRequestInterface = {
       user: this.form.getRawValue(),
     }
