@@ -1,6 +1,21 @@
 # MediumcloneAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.8.
+This course was based on building the [RealWorld](https://realworld-docs.netlify.app/docs/intro) demo. Specifically adhering to the [frontend specs](https://realworld-docs.netlify.app/docs/specs/frontend-specs/templates). This was really nice since it really gave you a chance to build something more that an simple 'to do' application.
+
+This course is the front end for the **RealWorld** application and compliments [NestJS - Building Real Project API From Scratch](https://www.udemy.com/course/nestjs-building-real-project-api-from-scratch) nicely!
+
+I'm still working on this course, I'll update this document as I go.
+
+### What I liked about the course
+
+### What I didn't like about the course
+
+### What I changed
+
+## Description
+
+My implementation of the **RealWorld** specs, as taught through the Udemy course [Angular and NgRx - Building Real Project From Scratch
+](https://www.udemy.com/course/angular-and-ngrx-building-real-project-from-scratch)
 
 ## Development server
 
