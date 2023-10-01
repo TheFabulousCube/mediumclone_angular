@@ -1,5 +1,5 @@
 import {createActionGroup, emptyProps, props} from '@ngrx/store'
-import {CurrentUserInterface} from 'src/app/shared/types/usercurrentUser.Interface'
+import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {RegisterRequestInterface} from '../types/registerRequest.interface'
 import {BackendErrorsInterface} from 'src/app/shared/types/backendErrors.interface'
 

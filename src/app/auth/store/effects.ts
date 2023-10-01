@@ -1,7 +1,7 @@
 import {inject} from '@angular/core'
 import {createEffect, Actions, ofType} from '@ngrx/effects'
 import {catchError, map, of, switchMap} from 'rxjs'
-import {CurrentUserInterface} from 'src/app/shared/types/usercurrentUser.Interface'
+import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {AuthService} from '../services/auth.service'
 import {authActions} from './actions'
 import {HttpErrorResponse} from '@angular/common/http'

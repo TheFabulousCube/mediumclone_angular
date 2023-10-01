@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http/testing'
 import {AuthService} from './auth.service'
 import {RegisterRequestInterface} from '../types/registerRequest.interface'
-import {CurrentUserInterface} from 'src/app/shared/types/usercurrentUser.Interface'
+import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {TestBed} from '@angular/core/testing'
 import {HttpClient, HttpResponse} from '@angular/common/http'
 

@@ -3,10 +3,8 @@ import {Component} from '@angular/core'
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms'
 import {RouterLink} from '@angular/router'
 import {Store} from '@ngrx/store'
-import {AuthService} from '../../services/auth.service'
 import {authActions} from '../../store/actions'
 import {selectIsSubmitting} from '../../store/reducers'
-import {AuthStateInterface} from '../../types/authState.interface'
 import {RegisterRequestInterface} from '../../types/registerRequest.interface'
 
 @Component({
