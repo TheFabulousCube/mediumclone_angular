@@ -8,6 +8,7 @@ import {authActions} from '../../store/actions'
 import {selectIsSubmitting, selectValidationErrors} from '../../store/reducers'
 import {RegisterRequestInterface} from '../../types/registerRequest.interface'
 import {BackendErrorMessages} from 'src/app/shared/components/backendErrorMessages/backendErrorMessages.component'
+import {errors, topBar} from 'src/app/shared/utils/constants'
 
 @Component({
   selector: 'mc-register',
@@ -21,6 +22,8 @@ import {BackendErrorMessages} from 'src/app/shared/components/backendErrorMessag
   ],
 })
 export class RegisterComponent {
+  readonly errors = errors
+  readonly routing = topBar
   form = this.fb.nonNullable.group({
     username: ['' /*Validators.required*/],
     email: ['' /*[Validators.email, Validators.required]*/],

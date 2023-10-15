@@ -3,7 +3,9 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign Up</h1>
+          <h1 class="text-xs-center">
+            {{ routing.SIGNUP }}
+          </h1>
           <p class="text-xs-center">
             <a routerLink="/login">Have an account?</a>
           </p>
@@ -40,20 +42,24 @@
               *ngIf="username.invalid && (username.dirty || username.touched)"
               class="alert alert-danger"
             >
-              <div *ngIf="username.errors?.['required']">Name is required.</div>
+              <div *ngIf="username.errors?.['required']">
+                {{ errors.REQ_NAME }}
+              </div>
             </div>
             <div
               *ngIf="email.invalid && (email.dirty || email.touched)"
               class="alert alert-danger"
             >
-              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['required']">
+                {{ errors.REQ_EMAIL }}
+              </div>
             </div>
             <div
               *ngIf="email.invalid && (email.dirty || email.touched)"
               class="alert alert-danger"
             >
               <div *ngIf="email.errors?.['email']">
-                Email must be valid email.
+                {{ errors.VALID_EMAIL }}
               </div>
             </div>
             <h1>Form Status: {{ form.status }}</h1>
@@ -62,7 +68,7 @@
               class="btn btn-lg btn-primary pull-xs-right"
               [disabled]="data.isSubmitting"
             >
-              Sign Up
+              {{ routing.SIGNUP }}
             </button>
           </form>
         </div>

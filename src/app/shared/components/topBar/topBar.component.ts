@@ -4,6 +4,7 @@ import {Store} from '@ngrx/store'
 import {selectCurrentUser} from 'src/app/auth/store/reducers'
 import {combineLatest} from 'rxjs'
 import {RouterLink} from '@angular/router'
+import {topBar} from '../../utils/constants'
 
 @Component({
   selector: 'mc-topbar',
@@ -12,6 +13,7 @@ import {RouterLink} from '@angular/router'
   templateUrl: './topBar.component.html',
 })
 export class TopBarComponent {
+  readonly constants = topBar
   data$ = combineLatest({
     currentUser$: this.store.select(selectCurrentUser),
   })

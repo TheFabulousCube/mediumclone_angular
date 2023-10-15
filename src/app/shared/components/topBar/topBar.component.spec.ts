@@ -8,6 +8,7 @@ import {AuthService} from 'src/app/auth/services/auth.service'
 import {By} from '@angular/platform-browser'
 import {CurrentUserInterface} from '../../types/currentUser.interface'
 import {selectCurrentUser} from 'src/app/auth/store/reducers'
+import {topBar} from '../../utils/constants'
 
 let user: CurrentUserInterface = {
   email: 'someone@somewhear.com',
@@ -49,9 +50,9 @@ describe('TopBarComponent', () => {
     const form = fixture.debugElement.query(By.css('ul'))
     const fields = form.queryAll(By.css('li'))
     expect(fields.length).toEqual(3)
-    expect(fields[0].nativeElement.innerText.trim()).toBe('Home')
-    expect(fields[1].nativeElement.innerText.trim()).toEqual('Login')
-    expect(fields[2].nativeElement.innerText.trim()).toBe('Signup')
+    expect(fields[0].nativeElement.innerText.trim()).toBe(topBar.HOME)
+    expect(fields[1].nativeElement.innerText.trim()).toEqual(topBar.LOGIN)
+    expect(fields[2].nativeElement.innerText.trim()).toBe(topBar.SIGNUP)
   })
 
   it('user logged in form has 4 fields', async () => {
@@ -61,9 +62,9 @@ describe('TopBarComponent', () => {
     const form = fixture.debugElement.query(By.css('ul'))
     const fields = form.queryAll(By.css('li'))
     expect(fields.length).toEqual(4)
-    expect(fields[0].nativeElement.innerText.trim()).toBe('Home')
-    expect(fields[1].nativeElement.innerText.trim()).toEqual('New Post')
-    expect(fields[2].nativeElement.innerText.trim()).toBe('Settings')
+    expect(fields[0].nativeElement.innerText.trim()).toBe(topBar.HOME)
+    expect(fields[1].nativeElement.innerText.trim()).toEqual(topBar.NEW_POST)
+    expect(fields[2].nativeElement.innerText.trim()).toBe(topBar.SETTINGS)
     expect(fields[3].nativeElement.innerText.trim()).toBe(user.username)
   })
 })

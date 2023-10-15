@@ -4,19 +4,22 @@
       <a class="navbar-brand" routerLink="/">Medium</a>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <a routerLink="/" class="nav-link">Home</a>
+          <a routerLink="/" class="nav-link">
+            <i class="ion-home"></i>
+            {{ constants.HOME }}</a
+          >
         </li>
         <ng-container *ngIf="data.currentUser$">
           <li class="nav-item">
             <a routerLink="/articles/new" class="nav-link">
               <i class="ion-compose"></i>
-              &nbsp; New Post
+              &nbsp; {{ constants.NEW_POST }}
             </a>
           </li>
           <li class="nav-item">
             <a routerLink="/settings" class="nav-link">
               <i class="ion-gear-a"></i>
-              &nbsp; Settings
+              &nbsp; {{ constants.SETTINGS }}
             </a>
           </li>
           <li class="nav-item">
@@ -32,14 +35,14 @@
         <ng-container *ngIf="data.currentUser$ == null">
           <li class="nav-item">
             <a routerLink="/login" class="nav-link">
-              <i class="ion-gear-a"></i>
-              &nbsp; Login
+              <i class="icon ion-log-in"></i>
+              &nbsp; {{ constants.LOGIN }}
             </a>
           </li>
           <li class="nav-item">
             <a routerLink="/register" class="nav-link">
               <i class="ion-gear-a"></i>
-              &nbsp; Signup
+              &nbsp; {{ constants.SIGNUP }}
             </a>
           </li>
         </ng-container>
