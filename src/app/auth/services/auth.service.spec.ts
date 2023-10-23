@@ -6,7 +6,7 @@ import {AuthService} from './auth.service'
 import {RegisterRequestInterface} from '../types/registerRequest.interface'
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {TestBed} from '@angular/core/testing'
-import {HttpClient, HttpResponse} from '@angular/common/http'
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http'
 import {LoginRequestInterface} from '../types/loginRequest.interface'
 
 const mockRegister: RegisterRequestInterface = {
@@ -61,39 +61,51 @@ describe('AuthService', () => {
     httpTestingController.verify()
   })
 
-  it('Register should return value from observable', () => {
-    service.register(mockRegister).subscribe({
-      next: (data) => data,
-      error: fail,
+  describe('get user', () => {
+    it('should return user', () => {
+      const user = service.getUser({user: mockResult})
+      expect(user).toEqual(mockResult)
     })
-
-    const req = httpTestingController.expectOne(testUrl)
-    expect(req.request.method).toEqual('POST')
-    expect(req.request.body).toEqual(mockRegister)
-
-    const expectedResponse = new HttpResponse({
-      status: 200,
-      statusText: 'OK',
-      body: mockResult,
-    })
-    req.event(expectedResponse)
   })
 
-  it('Login should return value from observable', () => {
-    service.login(mockLogin).subscribe({
-      next: (data) => data,
-      error: fail,
-    })
+  describe('get current user', () => {
+    it('should return current user', () => {
+      const currentUser = service.getCurrentUser().subscribe({
+        next: (data) => data,
+        error: fail,
+      })
 
-    const req = httpTestingController.expectOne(testUrl + '/login')
-    expect(req.request.method).toEqual('POST')
-    expect(req.request.body).toEqual(mockLogin)
-
-    const expectedResponse = new HttpResponse({
-      status: 200,
-      statusText: 'OK',
-      body: mockLogin,
+      const req = httpTestingController.expectOne(
+        'https://api.realworld.io/user'
+      )
+      expect(req.request.method).toEqual('GET')
+      expect(req.request.headers).toEqual(new HttpHeaders())
     })
-    req.event(expectedResponse)
+  })
+
+  describe('register user', () => {
+    it('Register should return value from observable', () => {
+      service.register(mockRegister).subscribe({
+        next: (data) => data,
+        error: fail,
+      })
+
+      const req = httpTestingController.expectOne(testUrl)
+      expect(req.request.method).toEqual('POST')
+      expect(req.request.body).toEqual(mockRegister)
+    })
+  })
+
+  describe('login user', () => {
+    it('Login should return value from observable', () => {
+      service.login(mockLogin).subscribe({
+        next: (data) => data,
+        error: fail,
+      })
+
+      const req = httpTestingController.expectOne(testUrl + '/login')
+      expect(req.request.method).toEqual('POST')
+      expect(req.request.body).toEqual(mockLogin)
+    })
   })
 })
