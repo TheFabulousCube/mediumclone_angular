@@ -5,11 +5,18 @@ import {feedActions} from './store/actions'
 import {selectError, selectFeedData, selectIsLoading} from './store/reducers'
 import {combineLatest} from 'rxjs'
 import {RouterModule} from '@angular/router'
+import {ErrorMessageComponent} from '../errorMessage/errorMessage.component'
+import {LoadingComponent} from '../loading/loading.component'
 
 @Component({
   selector: 'mc-feed',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ErrorMessageComponent,
+    LoadingComponent,
+  ],
   templateUrl: './feed.component.html',
 })
 export class FeedComponent implements OnInit {
