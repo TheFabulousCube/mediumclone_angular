@@ -29,7 +29,13 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Code scaffolding
 
-Run `ng generate component <component-name> --flat --standalone` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`. This will scaffoled out a new component in the current directory along with test files. The standalone flag uses a template for standalone componenets and skips the .module file.
+Run `ng generate component <component-name> --flat -s --standalone` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`. This will scaffold out a new component in the current directory along with test files. The standalone flag uses a template for standalone componenets and skips the .module file.
+
+-s for inline css, preventing style file creation
+--flat to prevent folder creation
+-t for inline template, preventing html file creation
+--skip-Tests to prevent .spec file creation
+Link to the Angular doc reference https://angular.io/cli/generate#component
 
 ## Build
 

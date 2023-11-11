@@ -27,6 +27,11 @@
         TAG LIST
       </a>
     </div>
-    Pagination
+    <mc-pagination
+      [total]="data.feed.articlesCount"
+      [limit]="limit"
+      [url]="baseUrl"
+      [currentPage]="currentPage"
+    ></mc-pagination>
   </div>
 </ng-container>
