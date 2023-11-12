@@ -3,13 +3,13 @@ import {FeedStateInterface} from '../types/feedState.interface'
 import {feedActions} from './actions'
 import {routerNavigationAction} from '@ngrx/router-store'
 
-const initialState: FeedStateInterface = {
+export const initialState: FeedStateInterface = {
   isLoading: false,
   error: null,
   data: null,
 }
 
-const feedFeature = createFeature({
+export const feedFeature = createFeature({
   name: 'feed',
   reducer: createReducer(
     initialState,

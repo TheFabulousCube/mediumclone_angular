@@ -25,8 +25,8 @@ export class RegisterComponent {
   readonly errors = errors
   readonly routing = topBar
   form = this.fb.nonNullable.group({
-    username: ['' /*Validators.required*/],
-    email: ['' /*[Validators.email, Validators.required]*/],
+    username: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required]],
     password: [''],
   })
   data$ = combineLatest({

@@ -3,7 +3,7 @@ import {AuthStateInterface} from '../types/authState.interface'
 import {authActions} from './actions'
 import {routerNavigationAction} from '@ngrx/router-store'
 
-const initialState: AuthStateInterface = {
+export const initialState: AuthStateInterface = {
   isSubmitting: false,
   currentUser: undefined,
   isLoading: false,

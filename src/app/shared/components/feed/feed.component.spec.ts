@@ -1,26 +1,15 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing'
-import {
-  ActivatedRoute,
-  convertToParamMap,
-  Params,
-  RouterModule,
-} from '@angular/router'
+import {ActivatedRoute, convertToParamMap, RouterModule} from '@angular/router'
 import {of} from 'rxjs'
 import {provideMockStore, MockStore} from '@ngrx/store/testing'
-
 import {FeedComponent} from './feed.component'
 import {PaginationComponent} from '../pagination/pagination.component'
 import {TagListComponent} from '../tagList/tagList.component'
-
-import {from} from 'rxjs'
 import {feedActions} from './store/actions'
 import {CommonModule} from '@angular/common'
 import {ErrorMessageComponent} from '../errorMessage/errorMessage.component'
 import {LoadingComponent} from '../loading/loading.component'
-import {By} from '@angular/platform-browser'
-import {DebugElement} from '@angular/core'
 import {ArticleInterface} from '../../types/article.interface'
-import {RouterTestingModule} from '@angular/router/testing'
 
 const testArticle1: ArticleInterface = {
   slug: 'test-article1',
@@ -58,13 +47,7 @@ const testArticle2: ArticleInterface = {
   },
 }
 
-class ActivatedRouteStub {
-  get queryParams() {
-    return of({})
-  }
-}
-
-describe('FeedComponent', () => {
+describe('Feed Component', () => {
   let component: FeedComponent
   let fixture: ComponentFixture<FeedComponent>
   let store: MockStore
