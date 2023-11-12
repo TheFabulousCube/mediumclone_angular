@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core'
 
 @Component({
   selector: 'mc-loading',
-  template: '<div>Loading . . .</div>',
+  template: '<div class="spinner">Loading . . .</div>',
   standalone: true,
 })
 export class LoadingComponent {}

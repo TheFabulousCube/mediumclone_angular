@@ -37,6 +37,7 @@ export class FeedComponent implements OnInit {
   limit = environment.limit
   baseUrl = this.router.url.split('?')[0]
   currentPage: number = 0
+  offset = 0
 
   constructor(
     private store: Store,
@@ -52,15 +53,15 @@ export class FeedComponent implements OnInit {
   }
 
   fetchFeed(): void {
-    const offset = this.currentPage * this.limit - this.limit
+    this.offset = this.currentPage * this.limit - this.limit
     const parsedUrl = queryString.parseUrl(this.apiUrl)
     const stringifiedParams = queryString.stringify({
       limit: this.limit,
-      offset,
+      offset: this.offset,
       ...parsedUrl.query,
     })
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
-    console.log('offset: ', offset, apiUrlWithParams)
+    console.log('offset: ', this.offset, apiUrlWithParams)
     this.store.dispatch(feedActions.getFeed({url: apiUrlWithParams}))
   }
 }

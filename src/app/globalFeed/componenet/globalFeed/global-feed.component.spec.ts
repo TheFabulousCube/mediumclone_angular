@@ -1,21 +1,40 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { GlobalFeedComponent } from './global-feed.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing'
+import {CommonModule} from '@angular/common'
+import {FeedComponent} from 'src/app/shared/components/feed/feed.component'
+import {BannerComponent} from 'src/app/shared/components/banner/banner.component'
+import {GlobalFeedComponent} from './global-feed.component'
+import {provideMockStore} from '@ngrx/store/testing'
+import {AuthService} from 'src/app/auth/services/auth.service'
+import {RouterTestingModule} from '@angular/router/testing'
 
 describe('GlobalFeedComponent', () => {
-  let component: GlobalFeedComponent;
-  let fixture: ComponentFixture<GlobalFeedComponent>;
+  let component: GlobalFeedComponent
+  let fixture: ComponentFixture<GlobalFeedComponent>
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        GlobalFeedComponent,
+        FeedComponent,
+        BannerComponent,
+        CommonModule,
+        RouterTestingModule,
+      ],
+      providers: [provideMockStore({}), AuthService],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [GlobalFeedComponent]
-    });
-    fixture = TestBed.createComponent(GlobalFeedComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(GlobalFeedComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+
+  it('should have apiUrl property set to "/articles"', () => {
+    expect(component.apiUrl).toEqual('/articles')
+  })
+})

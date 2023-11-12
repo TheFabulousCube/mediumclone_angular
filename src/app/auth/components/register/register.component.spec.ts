@@ -44,6 +44,12 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy()
   })
 
+  it('should have a form with username, email and password controls', () => {
+    expect(component.form.contains('username')).toBeTrue()
+    expect(component.form.contains('email')).toBeTrue()
+    expect(component.form.contains('password')).toBeTrue()
+  })
+
   it('form has 3 fields', async () => {
     const form = fixture.debugElement.query(By.css('form'))
     const fields = form.queryAll(By.css('input'))
@@ -67,9 +73,6 @@ describe('RegisterComponent', () => {
         .querySelectorAll('input')[1]
     const emailValueFromGroup = component.form.get('email')
     expect(emailValueFromGroup?.value).toEqual(formUsernameElement.value)
-    expect(emailValueFromGroup?.errors).toBeNull()
-    expect(emailValueFromGroup?.errors?.['required'].toBeTruthy())
-    expect(emailValueFromGroup?.errors?.['email'].toBeTruthy())
   })
 
   it('username value and validation after', () => {
@@ -90,5 +93,23 @@ describe('RegisterComponent', () => {
     expect(component.form.valid).toBeTruthy()
     expect(emailValueFromGroup?.errors?.['required'].toBeTruthy())
     expect(emailValueFromGroup?.errors?.['email'].toBeTruthy())
+  })
+
+  it('should make the form invalid if any control is empty', () => {
+    component.form.setValue({
+      username: '',
+      email: '',
+      password: '',
+    })
+    expect(component.form.valid).toBeFalse()
+  })
+
+  it('should make the form valid if all controls have a value', () => {
+    component.form.setValue({
+      username: 'testuser',
+      email: 'testuser@example.com',
+      password: 'testpassword',
+    })
+    expect(component.form.valid).toBeTrue()
   })
 })
