@@ -25,7 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Run Karma Tests
-    - name: Run npm i
-      run: npm i
-    - name: Run test:ci command
-      run: npm run test:ci
+      run: |
+          npm i
+          npm run test:ci
