@@ -27,7 +27,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/mediumclone_angular'),
       subdir: '.',
-      reporters: [{type: 'html'}, {type: 'text-summary'}],
+      reporters: [{type: 'json'}, {type: 'html'}, {type: 'text-summary'}],
     },
     reporters: ['progress', 'kjhtml'],
     browsers: ['ChromeHeadlessCI'],
