@@ -75,24 +75,39 @@ describe('RegisterComponent', () => {
     expect(emailValueFromGroup?.value).toEqual(formUsernameElement.value)
   })
 
+  it('password value and validation before', () => {
+    const formPasswordElement: HTMLInputElement =
+      fixture.debugElement.nativeElement
+        .querySelector('form')
+        .querySelectorAll('input')[2]
+    const passwordValueFromGroup = component.form.get('password')
+    expect(passwordValueFromGroup?.value).toEqual(formPasswordElement.value)
+  })
+
   it('username value and validation after', () => {
     const form: HTMLInputElement =
       fixture.debugElement.nativeElement.querySelector('form')
     const usernameField = form.querySelectorAll('input')[0]
     const emailField = form.querySelectorAll('input')[1]
+    const passwordField = form.querySelectorAll('input')[2]
     usernameField.value = 'mockUser'
     emailField.value = 'mock@email.com'
+    passwordField.value = 'password123'
     usernameField.dispatchEvent(new Event('input'))
     emailField.dispatchEvent(new Event('input'))
+    passwordField.dispatchEvent(new Event('input'))
     fixture.detectChanges()
 
     const usernameValueFromGroup = component.form.get('username')
     const emailValueFromGroup = component.form.get('email')
+    const passwordValueFromGroup = component.form.get('password')
     expect(usernameValueFromGroup?.value).toEqual(usernameField.value)
     expect(emailValueFromGroup?.value).toEqual(emailField.value)
+    expect(passwordValueFromGroup?.value).toEqual(passwordField.value)
     expect(component.form.valid).toBeTruthy()
     expect(emailValueFromGroup?.errors?.['required'].toBeTruthy())
     expect(emailValueFromGroup?.errors?.['email'].toBeTruthy())
+    expect(passwordValueFromGroup?.errors?.['required'].toBeTruthy())
   })
 
   it('should make the form invalid if any control is empty', () => {

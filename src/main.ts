@@ -10,12 +10,17 @@ import {provideHttpClient, withInterceptors} from '@angular/common/http'
 import {provideEffects} from '@ngrx/effects'
 import * as authEffects from './app/auth/store/effects'
 import * as feedEffects from './app/shared/components/feed/store/effects'
+import * as popularTagsEffects from './app/shared/components/popularTags/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store'
 import {authInterceptor} from './app/shared/services/authInterceptor'
 import {
   feedFeatureKey,
   feedReducer,
 } from './app/shared/components/feed/store/reducers'
+import {
+  popularTagsFeatureKey,
+  popularTagsReducer,
+} from './app/shared/components/popularTags/store/reducers'
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -26,7 +31,8 @@ bootstrapApplication(AppComponent, {
     }),
     provideState(authFeatureKey, authReducer),
     provideState(feedFeatureKey, feedReducer),
-    provideEffects(authEffects, feedEffects),
+    provideState(popularTagsFeatureKey, popularTagsReducer),
+    provideEffects(authEffects, feedEffects, popularTagsEffects),
     provideRouterStore(),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states

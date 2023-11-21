@@ -6,6 +6,7 @@ import {GlobalFeedComponent} from './global-feed.component'
 import {provideMockStore} from '@ngrx/store/testing'
 import {AuthService} from 'src/app/auth/services/auth.service'
 import {RouterTestingModule} from '@angular/router/testing'
+import {PopularTagsComponent} from 'src/app/shared/components/popularTags/popularTags.component'
 
 describe('GlobalFeedComponent', () => {
   let component: GlobalFeedComponent
@@ -19,6 +20,7 @@ describe('GlobalFeedComponent', () => {
         BannerComponent,
         CommonModule,
         RouterTestingModule,
+        PopularTagsComponent,
       ],
       providers: [provideMockStore({}), AuthService],
     }).compileComponents()

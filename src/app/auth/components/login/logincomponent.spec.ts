@@ -85,4 +85,29 @@ describe('Login Component', () => {
     expect(emailValueFromGroup?.errors?.['required'].toBeTruthy())
     expect(emailValueFromGroup?.errors?.['email'].toBeTruthy())
   })
+
+  it('password value and validation before', () => {
+    const formUsernameElement: HTMLInputElement =
+      fixture.debugElement.nativeElement
+        .querySelector('form')
+        .querySelectorAll('input')[1]
+    const passwordValueFromGroup = component.form.get('password')
+    expect(passwordValueFromGroup?.value).toEqual(formUsernameElement.value)
+    expect(passwordValueFromGroup?.errors).toBeNull()
+    expect(passwordValueFromGroup?.errors?.['required'].toBeTruthy())
+  })
+
+  it('password value and validation after', () => {
+    const form: HTMLInputElement =
+      fixture.debugElement.nativeElement.querySelector('form')
+    const passwordField = form.querySelectorAll('input')[1]
+    passwordField.value = 'password12345'
+    passwordField.dispatchEvent(new Event('input'))
+    fixture.detectChanges()
+
+    const passwordValueFromGroup = component.form.get('password')
+    expect(passwordValueFromGroup?.value).toEqual(passwordField.value)
+    expect(component.form.valid).toBeTruthy()
+    expect(passwordValueFromGroup?.errors?.['required'].toBeTruthy())
+  })
 })
