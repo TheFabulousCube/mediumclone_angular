@@ -6,6 +6,8 @@ export const topBar = {
   SETTINGS: 'Settings',
 }
 
+export const feed = {USER_FEED: 'Your Feed', GLOBAL_FEED: 'Global Feed'}
+
 export const errors = {
   REQ_NAME: 'Name is required.',
   REQ_EMAIL: 'Email is required.',
