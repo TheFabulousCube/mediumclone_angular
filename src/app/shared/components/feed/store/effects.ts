@@ -1,4 +1,3 @@
-import {HttpErrorResponse} from '@angular/common/http'
 import {inject} from '@angular/core'
 import {createEffect, Actions, ofType} from '@ngrx/effects'
 import {switchMap, of, map, catchError} from 'rxjs'
