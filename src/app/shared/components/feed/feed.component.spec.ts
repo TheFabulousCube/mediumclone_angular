@@ -10,6 +10,7 @@ import {CommonModule} from '@angular/common'
 import {ErrorMessageComponent} from '../errorMessage/errorMessage.component'
 import {LoadingComponent} from '../loading/loading.component'
 import {ArticleInterface} from '../../types/article.interface'
+import {SimpleChange} from '@angular/core'
 
 const testArticle1: ArticleInterface = {
   slug: 'test-article1',
@@ -118,5 +119,23 @@ describe('Feed Component', () => {
     fixture.detectChanges()
     const feedItems = fixture.nativeElement.querySelectorAll('.article-meta')
     expect(feedItems.length).toEqual(feed.data.articles.length)
+  })
+
+  it('should fetch feed when apiUrl changes', () => {
+    spyOn(component, 'fetchFeed')
+    const changes = {
+      apiUrl: new SimpleChange('oldValue', 'newValue', false),
+    }
+    component.ngOnChanges(changes)
+    expect(component.fetchFeed).toHaveBeenCalled()
+  })
+
+  it('should not fetch feed when apiUrl does not change', () => {
+    spyOn(component, 'fetchFeed')
+    const changes = {
+      apiUrl: new SimpleChange('oldValue', 'oldValue', false),
+    }
+    component.ngOnChanges(changes)
+    expect(component.fetchFeed).not.toHaveBeenCalled()
   })
 })

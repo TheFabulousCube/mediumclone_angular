@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core'
+import {Component, Input, OnChanges, OnInit} from '@angular/core'
 import {CommonModule} from '@angular/common'
 import {Store} from '@ngrx/store'
 import {feedActions} from './store/actions'
@@ -11,6 +11,7 @@ import {environment} from 'src/environments/environment'
 import {PaginationComponent} from '../pagination/pagination.component'
 import queryString from 'query-string'
 import {TagListComponent} from '../tagList/tagList.component'
+import {SimpleChanges} from '@angular/core'
 
 @Component({
   selector: 'mc-feed',
@@ -25,7 +26,7 @@ import {TagListComponent} from '../tagList/tagList.component'
   ],
   templateUrl: './feed.component.html',
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnChanges {
   @Input() apiUrl: string = ''
 
   data$ = combineLatest({
@@ -44,12 +45,22 @@ export class FeedComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
   ngOnInit(): void {
     this.store.dispatch(feedActions.getFeed({url: this.apiUrl}))
     this.route.queryParams.subscribe((params: Params) => {
       this.currentPage = Number(params['page'] || '1')
       this.fetchFeed()
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const isApiUrlChanged =
+      !changes['apiUrl'].firstChange &&
+      changes['apiUrl'].currentValue !== changes['apiUrl'].previousValue
+    if (isApiUrlChanged) {
+      this.fetchFeed()
+    }
   }
 
   fetchFeed(): void {
