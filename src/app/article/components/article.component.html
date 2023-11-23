@@ -1,22 +1,46 @@
-<div class="container page">Article page</div>
-<!-- <div class="container page">
-        <div class="row article-content">
-            <div class="col-md-12">
-            <h1>{{ article.title }}</h1>
-            <mc-article-meta [article]="article"></mc-article-meta>
-            </div>
+<ng-container *ngIf="data$ | async as data">
+  <div class="article-page">
+    <div class="banner">
+      <div class="container" *ngIf="data.article">
+        <h1>{{ data.article.title }}</h1>
+        <div class="article-meta">
+          <a [routerLink]="['/profiles', data.article.author.username]">
+            <img [src]="data.article.author.image" />
+          </a>
+          <div class="info">
+            <a
+              [routerLink]="['/profiles', data.article.author.username]"
+              class="author"
+            >
+              {{ data.article.author.username }}
+            </a>
+            <span class="date">{{ data.article.createdAt | date }}</span>
+          </div>
+          <span *ngIf="data.isAuthor">
+            <a
+              class="btn btn-outline-secondary btn-sm"
+              [routerLink]="['/editor', data.article.slug]"
+            >
+              <i class="ion-edit"></i> Edit Article
+            </a>
+            <button class="btn btn-outline-danger btn-sm">
+              <i class="ion-trash-a"></i> Delete Article
+            </button>
+          </span>
         </div>
-    <hr />
-    <div class="article-actions">
-        <mc-article-actions [article]="article"></mc-article-actions>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-        <p>{{ article.body }}</p>
-        <mc-tag-list [tags]="article.tagList"></mc-tag-list>
+  </div>
+  <div class="container page">
+    <mc-loading *ngIf="data.isLoading"></mc-loading>
+    <mc-error-message *ngIf="data.error"></mc-error-message>
+    <div class="row article-content" *ngIf="data.article">
+      <div class="col-xs-12">
+        <div>
+          <p>{{ data.article.body }}</p>
         </div>
+        <mc-tag-list [tags]="data.article.tagList"></mc-tag-list>
+      </div>
     </div>
-    <hr />
-    <div class="article-comments">
-        <mc-article-comments [slug]="article.slug"></mc-article-comments>
-    </div> -->
+  </div>
+</ng-container>
