@@ -23,7 +23,6 @@ export const registerEffect = createEffect(
             return authActions.registerSuccess({currentUser})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            console.log('Store effects: ', errorResponse.error.error)
             return of(
               authActions.registerFailure({
                 errors: errorResponse.error.error,
@@ -67,7 +66,6 @@ export const getCurrentUserEffect = createEffect(
             return authActions.getCurrentUserSuccess({currentUser})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            console.log('Store effects: ', errorResponse.error.error)
             return of(authActions.getCurrentUserFailure())
           })
         )
@@ -96,6 +94,27 @@ export const loginEffect = createEffect(
               authActions.loginFailure({
                 errors: errorResponse.error.error,
               })
+            )
+          })
+        )
+      })
+    )
+  },
+  {functional: true}
+)
+
+export const updateCurrentUserEffect = createEffect(
+  (actions$ = inject(Actions), authService = inject(AuthService)) => {
+    return actions$.pipe(
+      ofType(authActions.updateCurrentUser),
+      switchMap(({currentUserRequest}) => {
+        return authService.updateCurrentUser(currentUserRequest).pipe(
+          map((currentUser: CurrentUserInterface) => {
+            return authActions.updateCurrentUserSuccess({currentUser})
+          }),
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              authActions.updateCurrentUserFailure(errorResponse.error.error)
             )
           })
         )
