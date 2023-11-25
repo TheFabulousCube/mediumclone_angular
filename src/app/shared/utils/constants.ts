@@ -2,6 +2,7 @@ export const topBar = {
   HOME: 'Home',
   LOGIN: 'Log In',
   SIGNUP: 'Sign Up',
+  SIGNUP_LINK: 'Need an account?',
   NEW_POST: 'New Post',
   SETTINGS: 'Settings',
 }

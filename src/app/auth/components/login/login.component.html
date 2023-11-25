@@ -3,9 +3,9 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Log In</h1>
+          <h1 class="text-xs-center">{{ constants.topBar.LOGIN }}</h1>
           <p class="text-xs-center">
-            <a routerLink="/register">Need an account?</a>
+            <a routerLink="/register">{{ constants.topBar.SIGNUP_LINK }}</a>
           </p>
           <mc-backend-error-messages
             *ngIf="data.backendErrors"
@@ -32,14 +32,16 @@
               *ngIf="email.invalid && (email.dirty || email.touched)"
               class="alert alert-danger"
             >
-              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['required']">
+                {{ constants.errors.REQ_EMAIL }}
+              </div>
             </div>
             <div
               *ngIf="email.invalid && (email.dirty || email.touched)"
               class="alert alert-danger"
             >
               <div *ngIf="email.errors?.['email']">
-                Email must be valid email.
+                {{ constants.errors.VALID_EMAIL }}}
               </div>
             </div>
             <h1>Form Status: {{ form.status }}</h1>
@@ -48,7 +50,7 @@
               class="btn btn-lg btn-primary pull-xs-right"
               [disabled]="data.isSubmitting"
             >
-              Log In
+              {{ constants.topBar.LOGIN }}
             </button>
           </form>
         </div>

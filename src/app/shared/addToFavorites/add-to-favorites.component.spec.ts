@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing'
-import {By} from '@angular/platform-browser'
 import {AddToFavoritesComponent} from './add-to-favorites.component'
+import {provideMockStore} from '@ngrx/store/testing'
+import {AddToFavoritesService} from './services/addToFavorites.service'
 
 describe('AddToFavoritesComponent', () => {
   let component: AddToFavoritesComponent
@@ -9,6 +10,7 @@ describe('AddToFavoritesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AddToFavoritesComponent],
+      providers: [provideMockStore({}), AddToFavoritesService],
     }).compileComponents()
 
     fixture = TestBed.createComponent(AddToFavoritesComponent)

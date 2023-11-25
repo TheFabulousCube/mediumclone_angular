@@ -5,13 +5,12 @@ import {CommonModule} from '@angular/common'
 import {ReactiveFormsModule} from '@angular/forms'
 import {RouterLink} from '@angular/router'
 import {RouterTestingModule} from '@angular/router/testing'
-import {Store, StoreModule} from '@ngrx/store'
+import {StoreModule} from '@ngrx/store'
 import {MockStore, provideMockStore} from '@ngrx/store/testing'
 import {AuthService} from '../../services/auth.service'
 import {By} from '@angular/platform-browser'
 import {BackendErrorMessages} from 'src/app/shared/components/backendErrorMessages/backendErrorMessages.component'
-import {selectIsSubmitting} from '../../store/reducers'
-import {RegisterRequestInterface} from '../../types/registerRequest.interface'
+import * as constants from 'src/app/shared/utils/constants'
 
 describe('Login Component', () => {
   let component: LoginComponent
@@ -57,6 +56,20 @@ describe('Login Component', () => {
       password: '',
     }
     expect(form.value).toEqual(initialValues)
+  })
+
+  it('should dispatch an action on submit', () => {
+    const spy = spyOn(store, 'dispatch')
+    component.onSubmit()
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('should have as title "Login"', () => {
+    fixture.detectChanges()
+    const compiled = fixture.nativeElement
+    expect(compiled.querySelector('h1').textContent).toContain(
+      constants.topBar.LOGIN
+    )
   })
 
   it('email value and validation before', () => {

@@ -8,6 +8,7 @@ import {authActions} from '../../store/actions'
 import {selectIsSubmitting, selectValidationErrors} from '../../store/reducers'
 import {LoginRequestInterface} from '../../types/loginRequest.interface'
 import {BackendErrorMessages} from 'src/app/shared/components/backendErrorMessages/backendErrorMessages.component'
+import * as constants from 'src/app/shared/utils/constants'
 
 @Component({
   selector: 'mc-login',
@@ -21,6 +22,7 @@ import {BackendErrorMessages} from 'src/app/shared/components/backendErrorMessag
   ],
 })
 export class LoginComponent {
+  constants = constants
   form = this.fb.nonNullable.group({
     email: ['' /*[Validators.email, Validators.required]*/],
     password: [''],
