@@ -11,6 +11,7 @@ import {provideEffects} from '@ngrx/effects'
 import * as authEffects from './app/auth/store/effects'
 import * as feedEffects from './app/shared/components/feed/store/effects'
 import * as popularTagsEffects from './app/shared/components/popularTags/store/effects'
+import * as addToFavoritesEffects from './app/shared/addToFavorites/store/effects'
 import {provideRouterStore, routerReducer} from '@ngrx/router-store'
 import {authInterceptor} from './app/shared/services/authInterceptor'
 import {
@@ -21,6 +22,7 @@ import {
   popularTagsFeatureKey,
   popularTagsReducer,
 } from './app/shared/components/popularTags/store/reducers'
+import {AddToFavoritesService} from './app/shared/addToFavorites/services/addToFavorites.service'
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -32,7 +34,12 @@ bootstrapApplication(AppComponent, {
     provideState(authFeatureKey, authReducer),
     provideState(feedFeatureKey, feedReducer),
     provideState(popularTagsFeatureKey, popularTagsReducer),
-    provideEffects(authEffects, feedEffects, popularTagsEffects),
+    provideEffects(
+      authEffects,
+      feedEffects,
+      popularTagsEffects,
+      addToFavoritesEffects
+    ),
     provideRouterStore(),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
@@ -41,5 +48,6 @@ bootstrapApplication(AppComponent, {
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
+    AddToFavoritesService,
   ],
 })
