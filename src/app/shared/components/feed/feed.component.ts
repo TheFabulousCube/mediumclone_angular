@@ -12,6 +12,7 @@ import {PaginationComponent} from '../pagination/pagination.component'
 import queryString from 'query-string'
 import {TagListComponent} from '../tagList/tagList.component'
 import {SimpleChanges} from '@angular/core'
+import {AddToFavoritesComponent} from '../../addToFavorites/add-to-favorites.component'
 
 @Component({
   selector: 'mc-feed',
@@ -23,6 +24,7 @@ import {SimpleChanges} from '@angular/core'
     LoadingComponent,
     PaginationComponent,
     TagListComponent,
+    AddToFavoritesComponent,
   ],
   templateUrl: './feed.component.html',
 })

@@ -22,6 +22,8 @@ I'm still working on this course, I'll update this document as I go.
 ### What I changed
 
 - Just like in the backend, I started moving string literals to constants
+- I also added unit tests
+  - I was testing out GitHub Copilot and Copilot helped a **lot** with unit tests!
 
 ## Development server
 
