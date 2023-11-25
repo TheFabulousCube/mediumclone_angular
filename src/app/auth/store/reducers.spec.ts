@@ -107,6 +107,34 @@ describe('Auth reducer', () => {
     })
   })
 
+  describe('Update Current User', () => {
+    it('should update currentUser on Update Current User Success', () => {
+      const state = authReducer(
+        initialState,
+        authActions.updateCurrentUserSuccess({currentUser})
+      )
+      expect(state.currentUser).toEqual(currentUser)
+    })
+
+    it('should set validationErrors on Update Current User Failure', () => {
+      const errors = {email: ['invalid email']}
+      const state = authReducer(
+        initialState,
+        authActions.updateCurrentUserFailure({errors})
+      )
+      expect(state.validationErrors).toEqual(errors)
+    })
+  })
+
+  describe('Logout', () => {
+    it('should clear Submitting and clear errors', () => {
+      const state = authReducer(initialState, authActions.logout())
+      expect(state.isSubmitting).toEqual(initialState.isSubmitting)
+      expect(state.validationErrors).toBeNull()
+      expect(state.currentUser).toBeNull()
+    })
+  })
+
   it('should reset validationErrors on routerNavigationAction', () => {
     const mockRouterState: SerializedRouterStateSnapshot = {
       url: '/test',

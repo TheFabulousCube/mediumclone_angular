@@ -8,6 +8,7 @@ import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {TestBed} from '@angular/core/testing'
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http'
 import {LoginRequestInterface} from '../types/loginRequest.interface'
+import {CurrentUserRequestInterface} from 'src/app/shared/types/currentUserRequest.interface'
 
 const mockRegister: RegisterRequestInterface = {
   user: {
@@ -32,7 +33,18 @@ const mockResult: CurrentUserInterface = {
   image: null,
 }
 
-const testUrl = 'https://api.realworld.io/users'
+const mockUserRequest: CurrentUserRequestInterface = {
+  user: {
+    email: 'mock@test.com',
+    token: 'mockToken',
+    username: 'mockUser',
+    bio: null,
+    image: null,
+    password: 'mockPass',
+  },
+}
+
+const testUrl = 'https://api.realworld.io'
 
 describe('AuthService', () => {
   let service: AuthService
@@ -75,9 +87,7 @@ describe('AuthService', () => {
         error: fail,
       })
 
-      const req = httpTestingController.expectOne(
-        'https://api.realworld.io/user'
-      )
+      const req = httpTestingController.expectOne(testUrl + '/user')
       expect(req.request.method).toEqual('GET')
       expect(req.request.headers).toEqual(new HttpHeaders())
     })
@@ -90,7 +100,7 @@ describe('AuthService', () => {
         error: fail,
       })
 
-      const req = httpTestingController.expectOne(testUrl)
+      const req = httpTestingController.expectOne(testUrl + '/users')
       expect(req.request.method).toEqual('POST')
       expect(req.request.body).toEqual(mockRegister)
     })
@@ -103,9 +113,22 @@ describe('AuthService', () => {
         error: fail,
       })
 
-      const req = httpTestingController.expectOne(testUrl + '/login')
+      const req = httpTestingController.expectOne(testUrl + '/users/login')
       expect(req.request.method).toEqual('POST')
       expect(req.request.body).toEqual(mockLogin)
+    })
+  })
+
+  describe('update current user', () => {
+    it('update should return value from observable', () => {
+      service.updateCurrentUser(mockUserRequest).subscribe({
+        next: (data) => data,
+        error: fail,
+      })
+
+      const req = httpTestingController.expectOne(testUrl + '/user')
+      expect(req.request.method).toEqual('PUT')
+      expect(req.request.body).toEqual(mockUserRequest)
     })
   })
 })
