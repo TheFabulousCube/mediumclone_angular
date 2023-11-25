@@ -1,1 +1,60 @@
-<p>user-profile works!</p>
+<ng-container *ngIf="data$ | async as data">
+  <div class="profile-page" *ngIf="data.userProfile">
+    <div class="user-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-10 offset-md-1">
+            <img [src]="data.userProfile.image" class="user-img" />
+            <h4>{{ data.userProfile.username }}</h4>
+            <p>{{ data.userProfile.bio }}</p>
+            FOLLOW USER Button
+            <!-- <follow-button
+                            [isFollowing]="data.userProfile.following"
+                            [username]="data.userProfile.username"
+                        ></follow-button> -->
+            <a
+              *ngIf="data.isCurrentUserProfile"
+              class="btn btn-sm btn-outline-secondary action-btn"
+              routerLink="/settings"
+            >
+              <i class="ion-gear-a"></i> Edit Profile Settings</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div *ngIf="data.userProfile" class="col-xs-12 col-md-10 offset-md-1">
+            <div class="articles-toggle">
+              <ul class="nav nav-pills outline-active">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    [routerLink]="['/profiles', data.userProfile.username]"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    >My Articles</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    [routerLink]="[
+                      '/profiles',
+                      data.userProfile.username,
+                      'favorites'
+                    ]"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    >My Favorite Articles</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <mc-feed [apiUrl]="getApiUrl()"></mc-feed>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
